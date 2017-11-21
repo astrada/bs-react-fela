@@ -1,0 +1,11 @@
+{
+  "name": "bs-react-fela",
+  "sources": [
+    "src"
+  ],
+  "bs-dependencies": [
+    "reason-react"
+  ],
+  "refmt" : 3
+}
+
