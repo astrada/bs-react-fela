@@ -2,7 +2,12 @@ type styleObject('style) = Js.t(({..} as 'style));
 
 type rule('props, 'style) = Js.t(({..} as 'props)) => styleObject('style);
 
-type statelessComponent = ReasonReact.component(ReasonReact.stateless, ReasonReact.noRetainedProps, ReasonReact.actionless);
+type statelessComponent =
+  ReasonReact.component(
+    ReasonReact.stateless,
+    ReasonReact.noRetainedProps,
+    ReasonReact.actionless
+  );
 
 type baseElement = [ | `String(string) | `ReactClass(ReasonReact.reactClass)];
 
@@ -52,10 +57,15 @@ let createComponentWithProxy:
   statelessComponent;
 
 let withTheme:
+  (statelessComponent, (~theme: Js.t({..}), 'children) => statelessComponent, 'children) =>
+  statelessComponent;
+
+let connect:
   (
+    'rules,
     statelessComponent,
-    (~theme: Js.t({..}), 'children) =>
-    statelessComponent,
+    (~styles: Js.t(({..} as 'styles)), 'children) => statelessComponent,
+    Js.t(({..} as 'props)),
     'children
   ) =>
   statelessComponent;
@@ -63,14 +73,11 @@ let withTheme:
 module Provider: {
   type renderer;
   let defaultRenderer: renderer;
-  let make:
-    (~renderer: renderer=?, 'children) =>
-    statelessComponent;
+  let make: (~renderer: renderer=?, 'children) => statelessComponent;
 };
 
 module ThemeProvider: {
   type theme('theme) = Js.t(({..} as 'theme));
   let make:
-    (~theme: theme('theme), ~overwrite: bool=?, ReasonReact.reactElement) =>
-    statelessComponent;
+    (~theme: theme('theme), ~overwrite: bool=?, ReasonReact.reactElement) => statelessComponent;
 };

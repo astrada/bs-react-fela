@@ -116,6 +116,18 @@ let withTheme = (component, make, children) => {
   ReasonReact.wrapJsForReason(~reactClass, ~props=Js.Obj.empty(), children)
 };
 
+type reactClassFactory = ReasonReact.reactClass => ReasonReact.reactClass;
+
+[@bs.module "react-fela"] external connect_ : 'rules => reactClassFactory = "connect";
+
+let connect = (rules, component, make, props, children) => {
+  let reactClass =
+    ReasonReact.wrapReasonForJs(~component, (jsProps) => make(~styles=jsProps##styles, children));
+  let makeReactClass = connect_(rules);
+  let reactClass = makeReactClass(reactClass);
+  ReasonReact.wrapJsForReason(~reactClass, ~props, children)
+};
+
 module Provider = {
   type renderer;
   [@bs.module "react-fela"] external provider : ReasonReact.reactClass = "Provider";
