@@ -2,6 +2,8 @@ type styleObject('style) = Js.t(({..} as 'style));
 
 type rule('props, 'style) = Js.t(({..} as 'props)) => styleObject('style);
 
+type statelessComponent = ReasonReact.component(ReasonReact.stateless, ReasonReact.noRetainedProps, ReasonReact.actionless);
+
 type baseElement = [ | `String(string) | `ReactClass(ReasonReact.reactClass)];
 
 [@bs.module "react-fela"]
@@ -36,7 +38,7 @@ let createComponent:
     Js.t('props),
     'children
   ) =>
-  ReasonReact.component(ReasonReact.stateless, ReasonReact.noRetainedProps, ReasonReact.actionless);
+  statelessComponent;
 
 let createComponentWithProxy:
   (
@@ -47,27 +49,28 @@ let createComponentWithProxy:
     Js.t('props),
     'children
   ) =>
-  ReasonReact.component(ReasonReact.stateless, ReasonReact.noRetainedProps, ReasonReact.actionless);
+  statelessComponent;
+
+let withTheme:
+  (
+    statelessComponent,
+    (~theme: Js.t({..}), 'children) =>
+    statelessComponent,
+    'children
+  ) =>
+  statelessComponent;
 
 module Provider: {
   type renderer;
   let defaultRenderer: renderer;
   let make:
     (~renderer: renderer=?, 'children) =>
-    ReasonReact.component(
-      ReasonReact.stateless,
-      ReasonReact.noRetainedProps,
-      ReasonReact.actionless
-    );
+    statelessComponent;
 };
 
 module ThemeProvider: {
   type theme('theme) = Js.t(({..} as 'theme));
   let make:
-    (~theme: theme('theme), 'children) =>
-    ReasonReact.component(
-      ReasonReact.stateless,
-      ReasonReact.noRetainedProps,
-      ReasonReact.actionless
-    );
+    (~theme: theme('theme), ~overwrite: bool=?, ReasonReact.reactElement) =>
+    statelessComponent;
 };

@@ -2,6 +2,13 @@ type styleObject('style) = Js.t(({..} as 'style));
 
 type rule('props, 'style) = Js.t(({..} as 'props)) => styleObject('style);
 
+type statelessComponent =
+  ReasonReact.component(
+    ReasonReact.stateless,
+    ReasonReact.noRetainedProps,
+    ReasonReact.actionless
+  );
+
 type baseElement = [ | `String(string) | `ReactClass(ReasonReact.reactClass)];
 
 [@bs.module "react-fela"]
@@ -98,6 +105,17 @@ let createComponentWithProxy = (~rule, ~baseElement=?, ~passThrough=?, ~extend=?
   ReasonReact.wrapJsForReason(~reactClass, ~props, children)
 };
 
+[@bs.module "react-fela"]
+external withTheme_ : (ReasonReact.reactClass, Js.nullable(string)) => ReasonReact.reactClass =
+  "withTheme";
+
+let withTheme = (component, make, children) => {
+  let reactClass =
+    ReasonReact.wrapReasonForJs(~component, (jsProps) => make(~theme=jsProps##theme, children));
+  let reactClass = withTheme_(reactClass, Js.Nullable.undefined);
+  ReasonReact.wrapJsForReason(~reactClass, ~props=Js.Obj.empty(), children)
+};
+
 module Provider = {
   type renderer;
   [@bs.module "react-fela"] external provider : ReasonReact.reactClass = "Provider";
@@ -110,6 +128,10 @@ module Provider = {
 module ThemeProvider = {
   type theme('theme) = Js.t(({..} as 'theme));
   [@bs.module "react-fela"] external reactClass : ReasonReact.reactClass = "ThemeProvider";
-  let make = (~theme, children) =>
-    ReasonReact.wrapJsForReason(~reactClass, ~props={"theme": theme}, children);
+  let make = (~theme, ~overwrite=false, children) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass,
+      ~props={"theme": theme, "overwrite": Js.Boolean.to_js_boolean(overwrite)},
+      children
+    );
 };
