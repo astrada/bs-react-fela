@@ -1,6 +1,8 @@
 type styleObject('style) = Js.t(({..} as 'style));
 
-type rule('props, 'style) = Js.t(({..} as 'props)) => styleObject('style);
+type propsObject('props) = Js.t(({..} as 'props));
+
+type rule('props, 'style) = propsObject('props) => styleObject('style);
 
 type statelessComponent =
   ReasonReact.component(
@@ -39,8 +41,8 @@ let createComponent:
     ~rule: rule('props, 'style),
     ~baseElement: baseElement=?,
     ~passThrough: array(string)=?,
-    ~extend: Js.t('props) => Js.t({..})=?,
-    Js.t('props),
+    ~extend: propsObject('props) => Js.t({..})=?,
+    ~props: propsObject('props),
     'children
   ) =>
   statelessComponent;
@@ -50,22 +52,27 @@ let createComponentWithProxy:
     ~rule: rule('props, 'style),
     ~baseElement: baseElement=?,
     ~passThrough: array(string)=?,
-    ~extend: Js.t('props) => Js.t({..})=?,
-    Js.t('props),
+    ~extend: propsObject('props) => Js.t({..})=?,
+    ~props: propsObject('props),
     'children
   ) =>
   statelessComponent;
 
+type themeObject('theme) = Js.t(({..} as 'theme));
+
+type makeWithTheme('theme, 'children) =
+  (~theme: themeObject('theme), 'children) => statelessComponent;
+
 let withTheme:
-  (statelessComponent, (~theme: Js.t({..}), 'children) => statelessComponent, 'children) =>
+  (~component: statelessComponent, ~make: makeWithTheme('theme, 'children), 'children) =>
   statelessComponent;
 
 let connect:
   (
-    'rules,
-    statelessComponent,
-    (~styles: Js.t(({..} as 'styles)), 'children) => statelessComponent,
-    Js.t(({..} as 'props)),
+    ~rules: 'rules,
+    ~component: statelessComponent,
+    ~make: (~styles: Js.t(({..} as 'styles)), 'children) => statelessComponent,
+    ~props: propsObject('props),
     'children
   ) =>
   statelessComponent;
@@ -77,7 +84,7 @@ module Provider: {
 };
 
 module ThemeProvider: {
-  type theme('theme) = Js.t(({..} as 'theme));
   let make:
-    (~theme: theme('theme), ~overwrite: bool=?, ReasonReact.reactElement) => statelessComponent;
+    (~theme: themeObject('theme), ~overwrite: bool=?, ReasonReact.reactElement) =>
+    statelessComponent;
 };

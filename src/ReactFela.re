@@ -1,6 +1,8 @@
 type styleObject('style) = Js.t(({..} as 'style));
 
-type rule('props, 'style) = Js.t(({..} as 'props)) => styleObject('style);
+type propsObject('props) = Js.t(({..} as 'props));
+
+type rule('props, 'style) = propsObject('props) => styleObject('style);
 
 type statelessComponent =
   ReasonReact.component(
@@ -34,7 +36,7 @@ external createReactClassWithBaseElementAndPassThroughProps :
   ReasonReact.reactClass =
   "createComponent";
 
-let createComponent = (~rule, ~baseElement=?, ~passThrough=?, ~extend=?, props, children) => {
+let createComponent = (~rule, ~baseElement=?, ~passThrough=?, ~extend=?, ~props, children) => {
   let reactClass =
     switch passThrough {
     | Some(pt) =>
@@ -81,7 +83,7 @@ external createReactClassWithProxyBaseElementAndPassThroughProps :
   ReasonReact.reactClass =
   "createComponentWithProxy";
 
-let createComponentWithProxy = (~rule, ~baseElement=?, ~passThrough=?, ~extend=?, props, children) => {
+let createComponentWithProxy = (~rule, ~baseElement=?, ~passThrough=?, ~extend=?, ~props, children) => {
   let reactClass =
     switch passThrough {
     | Some(pt) =>
@@ -109,7 +111,12 @@ let createComponentWithProxy = (~rule, ~baseElement=?, ~passThrough=?, ~extend=?
 external withTheme_ : (ReasonReact.reactClass, Js.nullable(string)) => ReasonReact.reactClass =
   "withTheme";
 
-let withTheme = (component, make, children) => {
+type themeObject('theme) = Js.t(({..} as 'theme));
+
+type makeWithTheme('theme, 'children) =
+  (~theme: themeObject('theme), 'children) => statelessComponent;
+
+let withTheme = (~component, ~make, children) => {
   let reactClass =
     ReasonReact.wrapReasonForJs(~component, (jsProps) => make(~theme=jsProps##theme, children));
   let reactClass = withTheme_(reactClass, Js.Nullable.undefined);
@@ -120,7 +127,7 @@ type reactClassFactory = ReasonReact.reactClass => ReasonReact.reactClass;
 
 [@bs.module "react-fela"] external connect_ : 'rules => reactClassFactory = "connect";
 
-let connect = (rules, component, make, props, children) => {
+let connect = (~rules, ~component, ~make, ~props, children) => {
   let reactClass =
     ReasonReact.wrapReasonForJs(~component, (jsProps) => make(~styles=jsProps##styles, children));
   let makeReactClass = connect_(rules);
@@ -138,7 +145,6 @@ module Provider = {
 };
 
 module ThemeProvider = {
-  type theme('theme) = Js.t(({..} as 'theme));
   [@bs.module "react-fela"] external reactClass : ReasonReact.reactClass = "ThemeProvider";
   let make = (~theme, ~overwrite=false, children) =>
     ReasonReact.wrapJsForReason(
