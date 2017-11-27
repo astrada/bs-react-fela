@@ -67,9 +67,14 @@ let withTheme:
   (~component: statelessComponent, ~make: makeWithTheme('theme, 'children), 'children) =>
   statelessComponent;
 
+type connectRule('props, 'rule) = [
+  | `Object(Js.t(({..} as 'rule)))
+  | `Function(Js.t(({..} as 'props)) => Js.t(({..} as 'rule)))
+];
+
 let connect:
   (
-    ~rules: 'rules,
+    ~rules: connectRule('props, 'rule),
     ~component: statelessComponent,
     ~make: (~styles: Js.t(({..} as 'styles)), 'children) => statelessComponent,
     ~props: propsObject('props),

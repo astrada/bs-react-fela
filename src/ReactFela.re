@@ -127,10 +127,19 @@ type reactClassFactory = ReasonReact.reactClass => ReasonReact.reactClass;
 
 [@bs.module "react-fela"] external connect_ : 'rules => reactClassFactory = "connect";
 
+type connectRule('props, 'rule) = [
+  | `Object(Js.t(({..} as 'rule)))
+  | `Function(Js.t(({..} as 'props)) => Js.t(({..} as 'rule)))
+];
+
 let connect = (~rules, ~component, ~make, ~props, children) => {
   let reactClass =
     ReasonReact.wrapReasonForJs(~component, (jsProps) => make(~styles=jsProps##styles, children));
-  let makeReactClass = connect_(rules);
+  let makeReactClass =
+    switch rules {
+    | `Object(o) => connect_(o)
+    | `Function(f) => connect_(f)
+    };
   let reactClass = makeReactClass(reactClass);
   ReasonReact.wrapJsForReason(~reactClass, ~props, children)
 };
