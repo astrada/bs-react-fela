@@ -16,7 +16,7 @@ It generates atomic CSS and supports all common CSS features such as media
 queries, pseudo classes, keyframes and font-faces. Fela ships with a powerful
 plugin API adding e.g. [vendor
 prefixing](http://fela.js.org/packages/fela-plugin-prefixer) or [fallback
-value](http://fela.js.org/packages/fela-plugin-fallback-value support).
+value](http://fela.js.org/packages/fela-plugin-fallback-value) support.
 
 Fela can be used with
 [React](https://github.com/rofrischmann/fela/tree/master/packages/react-fela)
