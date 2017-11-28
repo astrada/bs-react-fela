@@ -23,3 +23,19 @@ Fela can be used with
 or with any other view library. It even supports [React
 Native](http://fela.js.org/docs/guides/UsageWithReactNative.html).
 
+### Prerequisites
+
+    npm install --global bs-platform
+    yarn install
+
+### How to compile
+
+    yarn build
+
+### How to use (in your projects)
+
+Run:
+
+    yarn add --dev bs-react-fela
+
+to add the library to your project dependencies. And add `bs-react-fela` to `dependencies` node of your `bsconfig.json`.
