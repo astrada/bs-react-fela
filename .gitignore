@@ -1,3 +1,4 @@
 .merlin
-lib
+lib/bs
+lib/ocaml
 node_modules
