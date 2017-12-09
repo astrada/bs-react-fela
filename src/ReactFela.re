@@ -1,4 +1,4 @@
-type styleObject('style) = Js.t(({..} as 'style));
+type styleObject('style) = Css.styleObject('style);
 
 type propsObject('props) = Js.t(({..} as 'props));
 

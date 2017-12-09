@@ -1,6 +1,6 @@
 {
   "name": "bs-react-fela",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "BuckleScript bindings for react-fela",
   "main": "src/ReactFela.re",
   "scripts": {
@@ -13,12 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/astrada/bs-react-fela.git"
   },
-  "keywords": [
-    "bucklescript",
-    "react",
-    "fela",
-    "reason"
-  ],
+  "keywords": ["bucklescript", "react", "fela", "reason"],
   "author": "Alessandro Strada <alessandro.strada@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -30,6 +25,7 @@
     "react-fela": "^6.0.5"
   },
   "devDependencies": {
+    "bs-css-core": "^0.1.0",
     "reason-react": "^0.3.0"
   }
 }
