@@ -1,7 +1,7 @@
 /** Bindings for react-fela: https://github.com/rofrischmann/fela/tree/master/packages/react-fela */
 type styleObject('style) = Css.styleObject('style);
 
-type propsObject('props) = Js.t(({..} as 'props));
+type propsObject('props) = Js.t({..} as 'props);
 
 type rule('props, 'style) = propsObject('props) => styleObject('style);
 
@@ -61,19 +61,23 @@ let createComponentWithProxy:
   ) =>
   statelessComponent;
 
-type themeObject('theme) = Js.t(({..} as 'theme));
+type themeObject('theme) = Js.t({..} as 'theme);
 
 type makeWithTheme('theme, 'children) =
   (~theme: themeObject('theme), 'children) => statelessComponent;
 
 /** https://github.com/rofrischmann/fela/blob/master/packages/react-fela/docs/withTheme.md */
 let withTheme:
-  (~component: statelessComponent, ~make: makeWithTheme('theme, 'children), 'children) =>
+  (
+    ~component: statelessComponent,
+    ~make: makeWithTheme('theme, 'children),
+    'children
+  ) =>
   statelessComponent;
 
 type connectRules('props, 'rules) = [
-  | `Object(Js.t(({..} as 'rules)))
-  | `Function(propsObject('props) => Js.t(({..} as 'rules)))
+  | `Object(Js.t({..} as 'rules))
+  | `Function(propsObject('props) => Js.t({..} as 'rules))
 ];
 
 /** https://github.com/rofrischmann/fela/blob/master/packages/react-fela/docs/connect.md */
@@ -81,7 +85,7 @@ let connect:
   (
     ~rules: connectRules('props, 'rules),
     ~component: statelessComponent,
-    ~make: (~styles: Js.t(({..} as 'styles)), 'children) => statelessComponent,
+    ~make: (~styles: Js.t({..} as 'styles), 'children) => statelessComponent,
     ~props: propsObject('props),
     'children
   ) =>
@@ -97,6 +101,10 @@ module Provider: {
 /** https://github.com/rofrischmann/fela/blob/master/packages/react-fela/docs/ThemeProvider.md */
 module ThemeProvider: {
   let make:
-    (~theme: themeObject('theme), ~overwrite: bool=?, ReasonReact.reactElement) =>
+    (
+      ~theme: themeObject('theme),
+      ~overwrite: bool=?,
+      ReasonReact.reactElement
+    ) =>
     statelessComponent;
 };
