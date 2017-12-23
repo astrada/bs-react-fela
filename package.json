@@ -13,7 +13,12 @@
     "type": "git",
     "url": "git+https://github.com/astrada/bs-react-fela.git"
   },
-  "keywords": ["bucklescript", "react", "fela", "reason"],
+  "keywords": [
+    "bucklescript",
+    "react",
+    "fela",
+    "reason"
+  ],
   "author": "Alessandro Strada <alessandro.strada@gmail.com>",
   "license": "MIT",
   "bugs": {
