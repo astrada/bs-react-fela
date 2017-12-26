@@ -6,9 +6,9 @@ asap@~2.0.3:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
 
-bs-css-core@^0.1.0:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/bs-css-core/-/bs-css-core-0.1.2.tgz#4cf980004254c7c2a75922864a3c643342e4bc34"
+bs-css-core@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/bs-css-core/-/bs-css-core-0.2.0.tgz#06beabe54c97cf93d9911928993db4662dd0c058"
 
 core-js@^1.0.0:
   version "1.2.7"
