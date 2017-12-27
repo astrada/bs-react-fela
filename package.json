@@ -1,13 +1,12 @@
 {
   "name": "bs-react-fela",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "BuckleScript bindings for react-fela",
   "main": "src/ReactFela.re",
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
-    "clean": "bsb -clean-world",
-    "prepare": "npm link bs-platform"
+    "clean": "bsb -clean-world"
   },
   "repository": {
     "type": "git",
@@ -30,7 +29,8 @@
     "react-fela": "^6.0.5"
   },
   "devDependencies": {
-    "bs-css-core": "^0.2.0",
+    "bs-css-core": "^0.2.1",
+    "bs-platform": "^2.1.0",
     "reason-react": "^0.3.0"
   }
 }
