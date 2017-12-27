@@ -25,7 +25,6 @@ Native](http://fela.js.org/docs/guides/UsageWithReactNative.html).
 
 ### Prerequisites
 
-    npm install --global bs-platform
     yarn install
 
 ### How to compile
