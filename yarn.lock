@@ -7,8 +7,8 @@ asap@~2.0.3:
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
 
 bs-css-core@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/bs-css-core/-/bs-css-core-0.2.1.tgz#5592e4ea9c316e994dd6054daa715a611478a5b3"
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/bs-css-core/-/bs-css-core-0.2.2.tgz#b1878862a01d2229102cb3263c34803368a241cc"
 
 bs-platform@^2.1.0:
   version "2.1.0"
