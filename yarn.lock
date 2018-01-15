@@ -10,10 +10,6 @@ bs-css-core@^0.2.1:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/bs-css-core/-/bs-css-core-0.2.2.tgz#b1878862a01d2229102cb3263c34803368a241cc"
 
-bs-platform@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.1.0.tgz#63560ff8f7142c9c0631559df1c35590b9f6d8b2"
-
 core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
@@ -46,19 +42,20 @@ fbjs@^0.8.16:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
-fela-bindings@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/fela-bindings/-/fela-bindings-1.3.3.tgz#4c64bf6b2936fcebcf92240c09995592ffd10d7c"
+fela-bindings@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/fela-bindings/-/fela-bindings-1.3.4.tgz#f48887dfed8c0948d851af14b18434d902cb034f"
   dependencies:
     fast-loops "^1.0.0"
-    fela-dom "^7.0.3"
+    fela-dom "^7.0.4"
     fela-tools "^5.1.2"
     shallow-equal "^1.0.0"
 
-fela-dom@^7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/fela-dom/-/fela-dom-7.0.3.tgz#8096b4289d05034185d240d06a51c714c171f6f6"
+fela-dom@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/fela-dom/-/fela-dom-7.0.4.tgz#30a159d12142c5cec376608a5dd1d4395462c4a0"
   dependencies:
+    css-in-js-utils "^2.0.0"
     fast-loops "^1.0.0"
     fela-utils "^8.0.3"
 
@@ -78,7 +75,7 @@ fela-utils@^8.0.3:
     css-in-js-utils "^2.0.0"
     fast-loops "^1.0.0"
 
-fela@^6.0.5, fela@^6.1.3:
+fela@^6.1.3:
   version "6.1.3"
   resolved "https://registry.yarnpkg.com/fela/-/fela-6.1.3.tgz#c3bc8726dada63c23914bed9ca79d902e61e9a74"
   dependencies:
@@ -141,34 +138,34 @@ prop-types@^15.5.8, prop-types@^15.6.0:
     object-assign "^4.1.1"
 
 "react-dom@>=15.0.0 || >=16.0.0":
-  version "16.1.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.1.1.tgz#b2e331b6d752faf1a2d31399969399a41d8d45f8"
+  version "16.2.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-fela@^6.0.5:
-  version "6.2.3"
-  resolved "https://registry.yarnpkg.com/react-fela/-/react-fela-6.2.3.tgz#0e3c973cfcd4ccf2eb48dc7312ea2b8207d3351c"
+react-fela@^6.2.4:
+  version "6.2.4"
+  resolved "https://registry.yarnpkg.com/react-fela/-/react-fela-6.2.4.tgz#18e5984c22d8eb8921ed4c43500a5f7608b91c40"
   dependencies:
-    fela-bindings "^1.3.3"
-    fela-dom "^7.0.3"
+    fela-bindings "^1.3.4"
+    fela-dom "^7.0.4"
     prop-types "^15.5.8"
 
 "react@>=15.0.0 || >=16.0.0":
-  version "16.1.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.1.1.tgz#d5c4ef795507e3012282dd51261ff9c0e824fe1f"
+  version "16.2.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-reason-react@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/reason-react/-/reason-react-0.3.0.tgz#c3ad272ed2dd2757f6934fcaacba9b192b891f57"
+reason-react@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/reason-react/-/reason-react-0.3.1.tgz#55d5fcd07825299ce5d04f99e763bf2af1f9e0f2"
   dependencies:
     react ">=15.0.0 || >=16.0.0"
     react-dom ">=15.0.0 || >=16.0.0"

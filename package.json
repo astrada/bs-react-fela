@@ -6,6 +6,7 @@
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
+    "prepare": "npm link bs-platform",
     "clean": "bsb -clean-world"
   },
   "repository": {
@@ -25,12 +26,11 @@
   },
   "homepage": "https://github.com/astrada/bs-react-fela",
   "dependencies": {
-    "fela": "^6.0.5",
-    "react-fela": "^6.0.5"
+    "fela": "^6.1.3",
+    "react-fela": "^6.2.4"
   },
   "devDependencies": {
     "bs-css-core": "^0.2.1",
-    "bs-platform": "^2.1.0",
-    "reason-react": "^0.3.0"
+    "reason-react": "^0.3.1"
   }
 }

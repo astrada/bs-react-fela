@@ -39,22 +39,22 @@ external createReactClassWithBaseElementAndPassThroughProps :
 let createComponent =
     (~rule, ~baseElement=?, ~passThrough=?, ~extend=?, ~props, children) => {
   let reactClass =
-    switch passThrough {
+    switch (passThrough) {
     | Some(pt) =>
       let be =
-        switch baseElement {
+        switch (baseElement) {
         | Some(be) => be
         | None => `String("div")
         };
       createReactClassWithBaseElementAndPassThroughProps(rule, be, pt);
     | None =>
-      switch baseElement {
+      switch (baseElement) {
       | Some(be) => createReactClassWithBaseElement(rule, be)
       | None => createReactClass(rule)
       }
     };
   let props =
-    switch extend {
+    switch (extend) {
     | None => props
     | Some(f) => Js.Obj.assign(props, f(props))
     };
@@ -88,22 +88,22 @@ external createReactClassWithProxyBaseElementAndPassThroughProps :
 let createComponentWithProxy =
     (~rule, ~baseElement=?, ~passThrough=?, ~extend=?, ~props, children) => {
   let reactClass =
-    switch passThrough {
+    switch (passThrough) {
     | Some(pt) =>
       let be =
-        switch baseElement {
+        switch (baseElement) {
         | Some(be) => be
         | None => `String("div")
         };
       createReactClassWithProxyBaseElementAndPassThroughProps(rule, be, pt);
     | None =>
-      switch baseElement {
+      switch (baseElement) {
       | Some(be) => createReactClassWithProxyAndBaseElement(rule, be)
       | None => createReactClassWithProxy(rule)
       }
     };
   let props =
-    switch extend {
+    switch (extend) {
     | None => props
     | Some(f) => Js.Obj.assign(props, f(props))
     };
@@ -145,7 +145,7 @@ let connect = (~rules, ~component, ~make, ~props, children) => {
       make(~styles=jsProps##styles, children)
     );
   let makeReactClass =
-    switch rules {
+    switch (rules) {
     | `Object(o) => connect_(o)
     | `Function(f) => connect_(f)
     };
