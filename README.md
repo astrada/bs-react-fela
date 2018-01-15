@@ -36,6 +36,7 @@ Native](http://fela.js.org/docs/guides/UsageWithReactNative.html).
 
 Run:
 
-    yarn add --dev bs-react-fela
+    yarn add --dev @astrada/bs-react-fela
 
-to add the library to your project dependencies. And add `bs-react-fela` to `dependencies` node of your `bsconfig.json`.
+to add the library to your project dependencies. And add
+`@astrada/bs-react-fela` to `dependencies` node of your `bsconfig.json`.
