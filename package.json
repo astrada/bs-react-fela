@@ -1,6 +1,6 @@
 {
-  "name": "bs-react-fela",
-  "version": "0.2.2",
+  "name": "@astrada/bs-react-fela",
+  "version": "0.2.3",
   "description": "BuckleScript bindings for react-fela",
   "main": "src/ReactFela.re",
   "scripts": {

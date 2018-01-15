@@ -1,5 +1,5 @@
 {
-  "name": "bs-react-fela",
+  "name": "@astrada/bs-react-fela",
   "sources": ["src"],
   "bs-dependencies": ["reason-react", "bs-css-core"],
   "refmt": 3
