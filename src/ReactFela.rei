@@ -1,5 +1,5 @@
 /** Bindings for react-fela: https://github.com/rofrischmann/fela/tree/master/packages/react-fela */
-type styleObject('style) = BsCssCore.Css.styleObject('style);
+type styleObject('style) = Js.t({..} as 'style);
 
 type propsObject('props) = Js.t({..} as 'props);
 

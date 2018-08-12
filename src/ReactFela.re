@@ -1,4 +1,4 @@
-type styleObject('style) = BsCssCore.Css.styleObject('style);
+type styleObject('style) = Js.t({..} as 'style);
 
 type propsObject('props) = Js.t({..} as 'props);
 
@@ -175,7 +175,7 @@ module ThemeProvider = {
       ~reactClass,
       ~props={
         "theme": theme,
-        "overwrite": Js.Boolean.to_js_boolean(overwrite)
+        "overwrite": overwrite
       },
       children
     );
