@@ -1,9 +1,6 @@
 /** Bindings for react-fela: https://github.com/rofrischmann/fela/tree/master/packages/react-fela */
-type styleObject('style) = Js.t({..} as 'style);
 
-type propsObject('props) = Js.t({..} as 'props);
-
-type rule('props, 'style) = propsObject('props) => styleObject('style);
+type rule('props, 'style) = 'props => 'style;
 
 type statelessComponent =
   ReasonReact.component(
@@ -43,8 +40,8 @@ let createComponent:
     ~rule: rule('props, 'style),
     ~baseElement: baseElement=?,
     ~passThrough: array(string)=?,
-    ~extend: propsObject('props) => Js.t({..})=?,
-    ~props: propsObject('props),
+    ~extend: 'props => 'newProps=?,
+    ~props: 'props,
     'children
   ) =>
   statelessComponent;
@@ -55,16 +52,14 @@ let createComponentWithProxy:
     ~rule: rule('props, 'style),
     ~baseElement: baseElement=?,
     ~passThrough: array(string)=?,
-    ~extend: propsObject('props) => Js.t({..})=?,
-    ~props: propsObject('props),
+    ~extend: 'props => 'newProps=?,
+    ~props: 'props,
     'children
   ) =>
   statelessComponent;
 
-type themeObject('theme) = Js.t({..} as 'theme);
-
 type makeWithTheme('theme, 'children) =
-  (~theme: themeObject('theme), 'children) => statelessComponent;
+  (~theme: 'theme, 'children) => statelessComponent;
 
 /** https://github.com/rofrischmann/fela/blob/master/packages/react-fela/docs/withTheme.md */
 let withTheme:
@@ -76,8 +71,8 @@ let withTheme:
   statelessComponent;
 
 type connectRules('props, 'rules) = [
-  | `Object(Js.t({..} as 'rules))
-  | `Function(propsObject('props) => Js.t({..} as 'rules))
+  | `Object('rules)
+  | `Function('props => 'rules)
 ];
 
 /** https://github.com/rofrischmann/fela/blob/master/packages/react-fela/docs/connect.md */
@@ -85,8 +80,8 @@ let connect:
   (
     ~rules: connectRules('props, 'rules),
     ~component: statelessComponent,
-    ~make: (~styles: Js.t({..} as 'styles), 'children) => statelessComponent,
-    ~props: propsObject('props),
+    ~make: (~styles: 'styles, 'children) => statelessComponent,
+    ~props: 'props,
     'children
   ) =>
   statelessComponent;
@@ -102,7 +97,7 @@ module Provider: {
 module ThemeProvider: {
   let make:
     (
-      ~theme: themeObject('theme),
+      ~theme: 'theme,
       ~overwrite: bool=?,
       ReasonReact.reactElement
     ) =>

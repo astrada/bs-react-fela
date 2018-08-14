@@ -1,8 +1,4 @@
-type styleObject('style) = Js.t({..} as 'style);
-
-type propsObject('props) = Js.t({..} as 'props);
-
-type rule('props, 'style) = propsObject('props) => styleObject('style);
+type rule('props, 'style) = 'props => 'style;
 
 type statelessComponent =
   ReasonReact.component(
@@ -53,12 +49,12 @@ let createComponent =
       | None => createReactClass(rule)
       }
     };
-  let props =
-    switch (extend) {
-    | None => props
-    | Some(f) => Js.Obj.assign(props, f(props))
-    };
-  ReasonReact.wrapJsForReason(~reactClass, ~props, children);
+  switch (extend) {
+  | None =>
+    ReasonReact.wrapJsForReason(~reactClass, ~props, children);
+  | Some(f) =>
+    ReasonReact.wrapJsForReason(~reactClass, ~props=f(props), children);
+  };
 };
 
 [@bs.module "react-fela"]
@@ -102,12 +98,12 @@ let createComponentWithProxy =
       | None => createReactClassWithProxy(rule)
       }
     };
-  let props =
-    switch (extend) {
-    | None => props
-    | Some(f) => Js.Obj.assign(props, f(props))
-    };
-  ReasonReact.wrapJsForReason(~reactClass, ~props, children);
+  switch (extend) {
+  | None =>
+    ReasonReact.wrapJsForReason(~reactClass, ~props, children);
+  | Some(f) =>
+    ReasonReact.wrapJsForReason(~reactClass, ~props=f(props), children);
+  };
 };
 
 [@bs.module "react-fela"]
@@ -115,10 +111,8 @@ external withTheme_ :
   (ReasonReact.reactClass, Js.nullable(string)) => ReasonReact.reactClass =
   "withTheme";
 
-type themeObject('theme) = Js.t({..} as 'theme);
-
 type makeWithTheme('theme, 'children) =
-  (~theme: themeObject('theme), 'children) => statelessComponent;
+  (~theme: 'theme, 'children) => statelessComponent;
 
 let withTheme = (~component, ~make, children) => {
   let reactClass =
@@ -135,8 +129,8 @@ type reactClassFactory = ReasonReact.reactClass => ReasonReact.reactClass;
 external connect_ : 'rules => reactClassFactory = "connect";
 
 type connectRules('props, 'rules) = [
-  | `Object(Js.t({..} as 'rules))
-  | `Function(propsObject('props) => Js.t({..} as 'rules))
+  | `Object('rules)
+  | `Function('props => 'rules)
 ];
 
 let connect = (~rules, ~component, ~make, ~props, children) => {

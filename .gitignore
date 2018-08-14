@@ -1,3 +1,4 @@
+*.swp
 .merlin
 lib/
 node_modules
